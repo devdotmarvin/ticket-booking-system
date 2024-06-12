@@ -1,8 +1,9 @@
-package dev.marvin.events;
+package dev.marvin.event;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-@Entity
+@Document
 public class Event {
     @Id
     private Integer id;
@@ -19,5 +20,4 @@ public class Event {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String location;
-    private Integer capacity;
 }
