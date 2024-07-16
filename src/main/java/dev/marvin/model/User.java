@@ -1,4 +1,4 @@
-package dev.marvin.user;
+package dev.marvin.model;
 
 public class User {
     private Integer id;
