@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ResponseDTO<T> {
+public class ResponseDto<T> {
     private Integer statusCode;
     private String status;
+    private String message;
     private T payload;
 }

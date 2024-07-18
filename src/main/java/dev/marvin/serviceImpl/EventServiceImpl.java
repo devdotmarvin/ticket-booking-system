@@ -1,5 +1,6 @@
 package dev.marvin.serviceImpl;
 
+import dev.marvin.dto.EventRequest;
 import dev.marvin.repository.EventRepository;
 import dev.marvin.service.EventService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
 
     @Override
-    public String create(String eventData) {
+    public String create(EventRequest eventRequest) {
         log.info("Inside create method of EventServiceImpl");
         return null;
     }
