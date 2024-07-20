@@ -1,40 +1,31 @@
 package dev.marvin.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tbl_tickets")
+@Table(name = "tbl_ticket_types")
 @Data
-@Builder
-public class Ticket {
+public class TicketType {
     @Id
     @GeneratedValue
-    private Integer ticketId;
+    private Integer ticketTypeId;
 
-    private BigDecimal ticketPrice;
+    @Column(unique = true)
+    private String ticketTypeName;
 
-    private TicketStatus ticketStatus;
-
-    @ManyToOne
-    private TicketType ticketType;
-
-    private Integer ticketCount;
-
-    @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
     @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
 }

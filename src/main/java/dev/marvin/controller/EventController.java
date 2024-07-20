@@ -22,18 +22,17 @@ public class EventController {
     public ResponseEntity<ResponseDto<Object>> create(@Validated @RequestBody EventRequest eventRequest) {
         log.info("Inside create method of EventController");
 
-        ResponseDto<Object> responseDTO = ResponseDto.
-                builder()
+        ResponseDto<Object> responseDTO = ResponseDto.builder()
                 .statusCode(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
-                .message(eventService.create(eventRequest))
+                .payload(eventService.create(eventRequest))
                 .build();
 
-        return ResponseEntity.ok(responseDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<?> getAll() {
         return null;
     }
 }

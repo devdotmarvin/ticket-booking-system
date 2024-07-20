@@ -1,9 +1,11 @@
 package dev.marvin.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class EventRequest {
@@ -13,11 +15,13 @@ public class EventRequest {
     @NotBlank(message = "Event Description is required")
     private String eventDescription;
 
-    @NotBlank(message = "Event StartDate is required")
-    private LocalDateTime startDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @NotEmpty
+    private Date startDate;
 
-    @NotBlank(message = "Event EndDate is required")
-    private LocalDateTime endDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @NotEmpty
+    private Date endDate;
 
     @NotBlank(message = "Event Location is required")
     private String location;

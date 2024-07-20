@@ -35,7 +35,7 @@ public class Event {
     private String location;
 
     @Column(name = "event_image_bytes")
-    private Byte[] imageBytes;
+    private byte[] imageBytes;
 
     @Column(name = "is_deleted")
     private Boolean isDeleted;
@@ -48,5 +48,6 @@ public class Event {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "event")
     private Set<Ticket> tickets;
 }
