@@ -6,21 +6,49 @@
       <h5 class="card-title">Add Event</h5>
     </div>
     <div class="card-body">
-      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
-
+      <form
+        [formGroup]="eventForm"
+        (ngSubmit)="onSubmit()"
+        class="needs-validation"
+        novalidate
+      >
         <!-- Event Name and Max Attendees -->
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="eventName">Event Name:</label>
-            <input type="text" class="form-control" id="eventName" formControlName="eventName" required>
-            <div class="invalid-feedback text-danger" *ngIf="eventForm.get('eventName')?.hasError('required') && eventForm.get('eventName')?.touched">
+            <input
+              type="text"
+              class="form-control"
+              id="eventName"
+              formControlName="eventName"
+              required
+            />
+            <div
+              class="invalid-feedback text-danger"
+              *ngIf="
+                eventForm.get('eventName')?.hasError('required') &&
+                eventForm.get('eventName')?.touched
+              "
+            >
               Event Name is required
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="maxAttendees">Max Attendees:</label>
-            <input type="number" class="form-control" id="maxAttendees" formControlName="maxAttendees" required>
-            <div class="invalid-feedback text-danger" *ngIf="eventForm.get('maxAttendees')?.hasError('required') && eventForm.get('maxAttendees')?.touched">
+            <input
+              type="number"
+              class="form-control"
+              id="maxAttendees"
+              formControlName="maxAttendees"
+              required
+            />
+            <div
+              class="invalid-feedback text-danger"
+              *ngIf="
+                eventForm.get('maxAttendees')?.hasError('required') &&
+                eventForm.get('maxAttendees')?.touched
+              "
+            >
               Max Attendees is required
             </div>
           </div>
@@ -30,15 +58,39 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="startDate">Start Date:</label>
-            <input type="datetime-local" class="form-control" id="startDate" formControlName="startDate" required>
-            <div class="invalid-feedback text-danger" *ngIf="eventForm.get('startDate')?.hasError('required') && eventForm.get('startDate')?.touched">
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="startDate"
+              formControlName="startDate"
+              required
+            />
+            <div
+              class="invalid-feedback text-danger"
+              *ngIf="
+                eventForm.get('startDate')?.hasError('required') &&
+                eventForm.get('startDate')?.touched
+              "
+            >
               Event Start Date is required
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="endDate">End Date:</label>
-            <input type="datetime-local" class="form-control" id="endDate" formControlName="endDate" required>
-            <div class="invalid-feedback text-danger" *ngIf="eventForm.get('endDate')?.hasError('required') && eventForm.get('endDate')?.touched">
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="endDate"
+              formControlName="endDate"
+              required
+            />
+            <div
+              class="invalid-feedback text-danger"
+              *ngIf="
+                eventForm.get('endDate')?.hasError('required') &&
+                eventForm.get('endDate')?.touched
+              "
+            >
               Event End Date is required
             </div>
           </div>
@@ -48,15 +100,40 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="location">Location:</label>
-            <input type="text" class="form-control" id="location" formControlName="location" required>
-            <div class="invalid-feedback text-danger" *ngIf="eventForm.get('location')?.hasError('required') && eventForm.get('location')?.touched">
+            <input
+              type="text"
+              class="form-control"
+              id="location"
+              formControlName="location"
+              required
+            />
+            <div
+              class="invalid-feedback text-danger"
+              *ngIf="
+                eventForm.get('location')?.hasError('required') &&
+                eventForm.get('location')?.touched
+              "
+            >
               Event Location is required
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="base64EncodedImage">Base64 Encoded Image:</label>
-            <input type="file" class="form-control" id="base64EncodedImage" formControlName="base64EncodedImage" required>
-            <div class="invalid-feedback text-danger" *ngIf="eventForm.get('base64EncodedImage')?.hasError('required') && eventForm.get('base64EncodedImage')?.touched">
+            <input
+              type="file"
+              class="form-control"
+              id="base64EncodedImage"
+              formControlName="base64EncodedImage"
+              required
+              (change)="onFileSelected($event)"
+            />
+            <div
+              class="invalid-feedback text-danger"
+              *ngIf="
+                eventForm.get('base64EncodedImage')?.hasError('required') &&
+                eventForm.get('base64EncodedImage')?.touched
+              "
+            >
               Event Image is required
             </div>
           </div>
@@ -66,20 +143,35 @@
         <div class="row">
           <div class="col">
             <label for="eventDescription">Event Description:</label>
-            <textarea class="form-control" id="eventDescription" formControlName="eventDescription" rows="5" required></textarea>
-            <div class="invalid-feedback text-danger" *ngIf="eventForm.get('eventDescription')?.hasError('required') && eventForm.get('eventDescription')?.touched">
+            <textarea
+              class="form-control"
+              id="eventDescription"
+              formControlName="eventDescription"
+              rows="5"
+              required
+            ></textarea>
+            <div
+              class="invalid-feedback text-danger"
+              *ngIf="
+                eventForm.get('eventDescription')?.hasError('required') &&
+                eventForm.get('eventDescription')?.touched
+              "
+            >
               Event Description is required
             </div>
           </div>
         </div>
 
-        <!-- Submit Button -->
         <div class="row mt-3">
           <div class="col">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-warning mx-2 text-white" (click)="resetForm()">
+              Reset
+            </button>
+            <button type="submit" class="btn btn-success mx-3 text-white"  [disabled]="!eventForm.valid">
+              Submit
+            </button>
           </div>
         </div>
-
       </form>
     </div>
   </div>

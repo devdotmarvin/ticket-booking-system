@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class EventRequest {
@@ -15,13 +15,13 @@ public class EventRequest {
     @NotBlank(message = "Event Description is required")
     private String eventDescription;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy hh:mm a")
     @NotEmpty
-    private Date startDate;
+    private LocalDateTime startDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy hh:mm a")
     @NotEmpty
-    private Date endDate;
+    private LocalDateTime endDate;
 
     @NotBlank(message = "Event Location is required")
     private String location;
