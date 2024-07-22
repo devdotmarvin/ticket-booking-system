@@ -1,28 +1,28 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EventRequest } from 'src/app/models/event-request.model';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  styleUrls: ['./events.component.css'],
 })
 export class EventsComponent {
   eventForm: FormGroup;
   base64EncodedImage: string | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private eventService: EventService) {
     this.eventForm = this.fb.group({
       eventName: ['', Validators.required],
-      maxAttendees: ['', Validators.required],
+      maxAttendees: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       eventDescription: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       location: ['', Validators.required],
-      base64EncodedImage: ['', Validators.required]
+      base64EncodedImage: ['', Validators.required],
     });
   }
-
 
   onSubmit() {
     if (this.eventForm.valid) {
@@ -33,16 +33,20 @@ export class EventsComponent {
         startDate: this.eventForm.value.startDate as string,
         endDate: this.eventForm.value.endDate as string,
         location: this.eventForm.value.location as string,
-        base64EncodedImage: this.base64EncodedImage as string
-      }
+        base64EncodedImage: this.base64EncodedImage as string,
+      };
       console.log('Submitted Form:', eventRequest);
-      // Here you can send the eventRequest object to your backend service
+      this.eventService.addEvent(eventRequest).subscribe({
+        next: (response) => console.log(response),
+        error: (error) => console.log(error),
+        complete: () => console.log('complete'),
+      });
     } else {
       this.eventForm.markAllAsTouched();
     }
   }
 
-  resetForm(){
+  resetForm() {
     this.eventForm.reset();
   }
 
@@ -61,5 +65,4 @@ export class EventsComponent {
     };
     reader.readAsDataURL(file);
   }
-
 }
